@@ -12,18 +12,17 @@ datasource db {
 }
 
 model Customer {
-  id               Int                @id @default(autoincrement())
-  name             String             @db.VarChar(40)
-  age              Int
-  preferredGenre   String             @db.VarChar(40)
-  EventOnCustomers EventOnCustomers[]
+  id             Int                @id @default(autoincrement())
+  name           String             @db.VarChar(40)
+  age            Int
+  preferredGenre String             @db.VarChar(40)
+  events         EventOnCustomers[]
 }
 
 model Event {
   id        Int                @id @default(autoincrement())
   name      String             @db.VarChar(40)
   date      DateTime
-  bandId    Int
   venueId   Int
   venue     Venue              @relation(fields: [venueId], references: [id])
   customers EventOnCustomers[]
@@ -48,9 +47,9 @@ model Band {
 }
 
 model EventOnCustomers {
-  eventId    Int      @unique
+  eventId    Int
   event      Event    @relation(fields: [eventId], references: [id])
-  customerId Int      @unique
+  customerId Int
   customer   Customer @relation(fields: [customerId], references: [id])
 
   @@id([eventId, customerId])
