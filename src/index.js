@@ -8,6 +8,7 @@ const app = express();
 
 const customerRouter = require("./resources/customer/router");
 const eventRouter =  require("./resources/event/router");
+const venueRouter = require("./resources/venue/router");
 
 /* SETUP MIDDLEWARE */
 
@@ -19,6 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 /* SETUP ROUTES */
+
+app.use("/customer", customerRouter);
+app.use("/event", eventRouter);
+app.use("/venue", venueRouter);
 
 app.get("*", (req, res) => { res.json({ ok: true }) });
 
