@@ -6,6 +6,9 @@ const morgan = require("morgan");
 
 const app = express();
 
+const customerRouter = require("./resources/customer/router");
+const eventRouter =  require("./resources/event/router");
+
 /* SETUP MIDDLEWARE */
 
 app.disable("x-powered-by");
