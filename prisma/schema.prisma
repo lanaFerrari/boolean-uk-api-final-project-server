@@ -11,45 +11,47 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Venue {
-  id           Int    @id @default(autoincrement())
-  buildingName String @db.VarChar(40)
-  city         String @db.VarChar(40)
-  street       String @db.VarChar(40)
-  postCode     String @db.VarChar(40)
-}
-
 model Customer {
-  id               Int               @id @default(autoincrement())
-  name             String            @db.VarChar(40)
+  id               Int                @id @default(autoincrement())
+  name             String             @db.VarChar(40)
   age              Int
-  preferredGenre   String            @db.VarChar(40)
-  events           Event[]
-  EventOnCustomers EventOnCustomers?
+  preferredGenre   String             @db.VarChar(40)
+  EventOnCustomers EventOnCustomers[]
 }
 
 model Event {
-  id               Int               @id @default(autoincrement())
-  name             String            @db.VarChar(40)
-  date             DateTime
-  bandId           Int
-  venueId          Int
-  customers        Customer[]        @relation(fields: [customerId], references: [id])
-  customerId       Int?
-  EventOnCustomers EventOnCustomers?
+  id        Int                @id @default(autoincrement())
+  name      String             @db.VarChar(40)
+  date      DateTime
+  bandId    Int
+  venueId   Int
+  venue     Venue              @relation(fields: [venueId], references: [id])
+  customers EventOnCustomers[]
+  band      Band?
+}
+
+model Venue {
+  id           Int     @id @default(autoincrement())
+  buildingName String  @db.VarChar(40)
+  city         String  @db.VarChar(40)
+  street       String  @db.VarChar(40)
+  postCode     String  @db.VarChar(40)
+  events       Event[]
 }
 
 model Band {
-  id    Int    @id @default(autoincrement())
-  name  String @db.VarChar(40)
-  genre String @db.VarChar(40)
+  id      Int    @id @default(autoincrement())
+  name    String @db.VarChar(40)
+  genre   String @db.VarChar(40)
+  event   Event  @relation(fields: [eventId], references: [id])
+  eventId Int    @unique
 }
 
 model EventOnCustomers {
   eventId    Int      @unique
-  events     Event    @relation(fields: [eventId], references: [id])
+  event      Event    @relation(fields: [eventId], references: [id])
   customerId Int      @unique
-  customers  Customer @relation(fields: [customerId], references: [id])
+  customer   Customer @relation(fields: [customerId], references: [id])
 
   @@id([eventId, customerId])
 }
