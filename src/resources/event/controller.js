@@ -17,6 +17,7 @@ function getEventById(req, res) {
         })
 }
 
+<<<<<<< HEAD
 function createEventWithBandAndVenue(req, res) {
     console.log("createEventWithBand working")
     prisma.event.create({
@@ -49,3 +50,17 @@ function createEventWithBandAndVenue(req, res) {
 
 
 module.exports = { getEventById, createEventWithBandAndVenue }
+=======
+const getAllEvents = async (req, res) => {
+    try {
+        const result = await prisma.event.findMany()
+        res.json({ data: result });
+    } catch (error) {
+        console.error({ error: error.message });
+        res.status(500).json({ error: error.message });    
+    }
+}
+
+
+module.exports = { getEventById, getAllEvents }
+>>>>>>> cab00ba50a30fba334d32cdd80bf43f7b9fec229
