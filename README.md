@@ -2,10 +2,15 @@
 
 Learning Objectives
 Use a source code management tool to integrate work in one codebase with multiple contributors
+
 Design and build an architecture that has a front-end application consuming data from a database-backed API
+
 Explain how data flows through this application architecture
+
 Use Agile ceremonies including standups and retrospectives to develop software in a team
+
 Project Requirements
+
 Planning Stage
 Project must have at least one of each relationship (1-to-1, 1-to-many, many-to-many)
 Each student must create a diagram of the data models they are responsible for
