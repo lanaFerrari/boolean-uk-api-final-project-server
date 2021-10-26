@@ -21,9 +21,9 @@ app.use(morgan("dev"));
 
 /* SETUP ROUTES */
 
-app.use("/customer", customerRouter);
-app.use("/event", eventRouter);
-app.use("/venue", venueRouter);
+app.use("/customers", customerRouter);
+app.use("/events", eventRouter);
+app.use("/venues", venueRouter);
 
 app.get("*", (req, res) => { res.json({ ok: true }) });
 
