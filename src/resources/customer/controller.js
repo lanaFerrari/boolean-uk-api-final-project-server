@@ -18,6 +18,18 @@ const createCustomer = async (req, res) =>{
     }
 };
 
+const deleteById = async (req, res) =>{
+    const reqId = req.params.id;
+
+    const result = await prisma.customer.deleteMany({
+        where:{
+            id: parseInt(reqId),
+        },
+    })
+    res.json({ data: result });  
+}
+
 module.exports ={
-    createCustomer
+    createCustomer,
+    deleteById
 }
