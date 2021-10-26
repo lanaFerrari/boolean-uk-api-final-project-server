@@ -17,5 +17,35 @@ function getEventById(req, res) {
         })
 }
 
+function createEventWithBandAndVenue(req, res) {
+    console.log("createEventWithBand working")
+    prisma.event.create({
+        data: {
+            ...req.body,
+            date: new Date(req.body.date),
+            band: {
+                create:
+                    { ...req.body.band },
+            },
+            venue: {
+                create:
+                    { ...req.body.venue },
+            }
+        },
+        include: {
+            band: true,
+            venue: true
+        }
+    })
+        .then((result) => {
+            console.log(result)
+            res.json({ data: result })
+        })
+        .catch(error => {
+            console.error(error)
+            res.status(500).json(error)
+        })
+}
 
-module.exports = { getEventById }
+
+module.exports = { getEventById, createEventWithBandAndVenue }
