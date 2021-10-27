@@ -4,10 +4,10 @@ const { getEventById, createEventWithBandAndVenue, getAllEvents } = require("./c
 
 const router = express.Router();
 
-router.get("/", getAllEvents);
-
 router.get("/:id", getEventById)
 
 router.post("/", createEventWithBandAndVenue)
+
+router.get("/", getAllEvents);
 
 module.exports = router;

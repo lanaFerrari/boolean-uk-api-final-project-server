@@ -57,5 +57,4 @@ function createEventWithBandAndVenue(req, res) {
         })
 }
 
-
 module.exports = { getEventById, createEventWithBandAndVenue, getAllEvents }
