@@ -1,15 +1,5 @@
 const prisma = require("../../utils/database");
 
-const getAllEvents = async (req, res) => {
-    try {
-        const result = await prisma.event.findMany()
-        res.json({ data: result });
-    } catch (error) {
-        console.error({ error: error.message });
-        res.status(500).json({ error: error.message });
-    }
-}
-
 function getEventById(req, res) {
     console.log("working")
     prisma.event.findUnique({
@@ -56,5 +46,16 @@ function createEventWithBandAndVenue(req, res) {
             res.status(500).json(error)
         })
 }
+
+const getAllEvents = async (req, res) => {
+    try {
+        const result = await prisma.event.findMany()
+        res.json({ data: result });
+    } catch (error) {
+        console.error({ error: error.message });
+        res.status(500).json({ error: error.message });
+    }
+}
+
 
 module.exports = { getEventById, createEventWithBandAndVenue, getAllEvents }
