@@ -1,5 +1,15 @@
 const prisma = require("../../utils/database");
 
+const getAllCustomers = async (req, res) =>{
+    try {
+        const result = await prisma.customer.findMany()
+        res.json({ data: result });
+    } catch (error) {
+        console.error({ error: error.message });
+        res.status(500).json({ error: error.message });    
+    }
+};
+
 const createCustomer = async (req, res) =>{
     const { name, age, preferredGenre } = req.body;
 
@@ -38,5 +48,6 @@ try {
 
 module.exports ={
     createCustomer,
-    deleteById
+    deleteById,
+    getAllCustomers
 }
