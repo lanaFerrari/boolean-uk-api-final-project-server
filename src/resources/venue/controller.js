@@ -23,6 +23,17 @@ const editVenueWithId = async (req, res) =>{
     }
 };
 
+const getAllVenues = async (req, res) => {
+    try {
+        const result = await prisma.venue.findMany()
+        res.json({ data: result });
+    } catch (error) {
+        console.error({ error: error.message });
+        res.status(500).json({ error: error.message });
+    }
+};
+
 module.exports={
-    editVenueWithId
+    editVenueWithId,
+    getAllVenues
 };
